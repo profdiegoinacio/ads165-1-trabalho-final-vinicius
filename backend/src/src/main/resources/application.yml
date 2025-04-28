@@ -1,0 +1,14 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet.cors: TRACE
+    org.springframework.web.cors: TRACE
+
+spring:
+  application:
+    name: backend
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api

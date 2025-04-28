@@ -1,0 +1,57 @@
+### Listar todos os produtos
+GET http://localhost:8080/api/produtos
+
+### Buscar produtos
+GET http://localhost:8080/api/produtos?nome=exemplo&precoMinimo=50.0&categoria=eletronicos&ordenarPor=nome&ordem=asc&pagina=1&tamanho=10
+Content-Type: application/json
+
+### Buscar produto por ID
+GET http://localhost:8080/api/produtos/1
+Content-Type: application/json
+
+### Criar novo produto (estoque nulo: gera erro de validação)
+POST http://localhost:8080/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Produto Exemplo",
+  "preco": 100.0,
+  "categoria": "Eletrônicos"
+}
+
+### Criar novo produto
+POST http://localhost:8080/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Roteador Wireless TP-Link Archer C6",
+  "preco": 249.90,
+  "estoque": 20,
+  "categoria": "Eletrônicos"
+}
+
+### Atualizar o produto (PUT)
+PUT http://localhost:8080/api/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "iPhone 14",
+  "preco": 4999.0,
+  "estoque": 10,
+  "categorias": [
+    "Eletrônicos",
+    "Smartphones"
+  ]
+}
+
+### Atualizar parcialmente o produto (PATCH)
+PATCH http://localhost:8080/api/produtos/1
+Content-Type: application/json
+
+{
+  "preco": 150.0
+}
+
+### Excluir produto
+DELETE http://localhost:8080/api/produtos/1
+Content-Type: application/json
