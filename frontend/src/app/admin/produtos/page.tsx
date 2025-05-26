@@ -106,10 +106,6 @@ function ProdutoListaAdmin({
         carregarProdutos();
     }, [chaveAtualizacao]);
 
-    //ProdutoService.listarTodos().then(produtos => setProdutos(produtos)).finally(()=> {
-       // setCarregando(false)
-   // })
-
 
     if (carregando) return (
         <div className="flex justify-center items-center py-12">
