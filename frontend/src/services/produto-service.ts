@@ -7,7 +7,7 @@ export const ProdutoService = {
      * Busca todos os produtos disponíveis na API
      */
     async listarTodos(): Promise<Produto[]> {
-        const response = await fetch(`${API_URL}/produtos`);
+        const response = await fetch(`${API_URL}/produtos/todos`);
 
         if (!response.ok) {
             throw new Error(`Erro ao buscar produtos: ${response.status}`);

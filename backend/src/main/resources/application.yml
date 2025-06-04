@@ -1,5 +1,6 @@
 logging:
   level:
+    org.springframework.security: DEBUG
     org.springframework.web: DEBUG
     org.springframework.web.servlet.cors: TRACE
     org.springframework.web.cors: TRACE
@@ -21,8 +22,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false
 
 server:
   port: 8080
   servlet:
     context-path: /api
+
+app:
+  jwt:
+    secret: 03O2Kdx9PoM8/9fE9OvSxhMX11tkAVguyFtNeuL/y6A=
+    expiration.ms: 3600000 # 1 hora

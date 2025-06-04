@@ -1,0 +1,1 @@
+export { GET, POST } from '@/auth'; // Ajuste o caminho para o seu arquivo auth.ts

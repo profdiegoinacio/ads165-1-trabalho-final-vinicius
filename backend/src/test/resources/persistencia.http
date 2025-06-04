@@ -1,0 +1,136 @@
+### Arquivo de testes HTTP para API de Produtos
+### Use com REST Client do VS Code, IntelliJ HTTP Client ou similar
+@baseUrl = http://localhost:8080/api
+
+### --------------------------------------------------
+### CAPÍTULO 9: PERSISTÊNCIA COM SPRING DATA JPA
+### --------------------------------------------------
+
+### Listar todos os produtos
+GET {{baseUrl}}/produtos
+
+### Buscar produto por ID
+GET {{baseUrl}}/produtos/1
+
+### Criar novo produto
+POST {{baseUrl}}/produtos
+Content-Type: application/json
+
+{
+  "nome": "Smartphone XYZ",
+  "preco": 1999.99,
+  "estoque": 50
+}
+
+### Atualizar produto
+PUT {{baseUrl}}/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Smartphone XYZ Premium",
+  "preco": 2499.99,
+  "estoque": 30
+}
+
+### Deletar produto
+DELETE {{baseUrl}}/produtos/1
+
+### Buscar produtos por nome
+GET {{baseUrl}}/produtos/nome?nome=smartphone
+
+### Buscar produtos por preço máximo
+GET {{baseUrl}}/produtos/preco?precoMaximo=2000.0
+
+### Buscar produtos com estoque mínimo
+GET {{baseUrl}}/produtos/estoque?estoqueMinimo=10
+
+### --------------------------------------------------
+### CAPÍTULO 10: MAPEAMENTO DE RELACIONAMENTOS
+### --------------------------------------------------
+
+### Criar uma categoria
+POST {{baseUrl}}/categorias
+Content-Type: application/json
+
+{
+  "nome": "Eletrônicos"
+}
+
+### Criar um produto com categoria
+POST {{baseUrl}}/produtos
+Content-Type: application/json
+
+{
+  "nome": "Smart TV LED 55\"",
+  "preco": 3499.99,
+  "estoque": 15,
+  "categoria": {
+    "id": 1
+  }
+}
+
+### Adicionar detalhes a um produto (OneToOne)
+POST {{baseUrl}}/produtos/1/detalhes
+Content-Type: application/json
+
+{
+  "dimensoes": "123.5 x 71.2 x 8.1 cm",
+  "peso": 15.8,
+  "material": "Plástico e Metal"
+}
+
+### Criar um fornecedor
+POST {{baseUrl}}/fornecedores
+Content-Type: application/json
+
+{
+  "nome": "Tech Distribuição LTDA",
+  "telefone": "(11) 3456-7890",
+  "email": "contato@techdistribuicao.com.br"
+}
+
+### Associar fornecedor a um produto (ManyToMany)
+POST {{baseUrl}}/produtos/1/fornecedores/1
+
+### Remover associação entre produto e fornecedor
+DELETE {{baseUrl}}/produtos/1/fornecedores/1
+
+### Buscar produtos por categoria
+GET {{baseUrl}}/produtos/categoria/1
+
+### Buscar produtos por fornecedor
+GET {{baseUrl}}/produtos/fornecedor/1
+
+### --------------------------------------------------
+### CAPÍTULO 11: PAGINAÇÃO, ORDENAÇÃO E FILTRAGEM
+### --------------------------------------------------
+
+### Listar produtos com paginação padrão
+GET {{baseUrl}}/produtos
+
+### Listar produtos com paginação personalizada
+GET {{baseUrl}}/produtos?page=0&size=5
+
+### Listar produtos com ordenação (preço decrescente)
+GET {{baseUrl}}/produtos?sort=preco,desc
+
+### Listar produtos com múltiplas ordenações
+GET {{baseUrl}}/produtos?sort=categoria.nome,asc&sort=preco,desc
+
+### Listar produtos com filtragem por nome
+GET {{baseUrl}}/produtos?nome=smart
+
+### Listar produtos com filtragem por faixa de preço
+GET {{baseUrl}}/produtos?precoMinimo=1000&precoMaximo=3000
+
+### Listar produtos de uma categoria específica
+GET {{baseUrl}}/produtos?categoriaId=1
+
+### Combinando filtragem, paginação e ordenação
+GET {{baseUrl}}/produtos?nome=smart&precoMinimo=1000&categoriaId=1&page=0&size=5&sort=preco,asc
+
+### Buscar produtos por categoria com paginação
+GET {{baseUrl}}/produtos/categoria/1?page=0&size=10&sort=nome,asc
+
+### Todos os produtos sem paginação (use com cuidado em produção)
+GET {{baseUrl}}/produtos/todos
